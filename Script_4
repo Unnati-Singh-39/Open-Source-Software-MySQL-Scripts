@@ -1,0 +1,34 @@
+#!/bin/bash
+# Script 4: Robust Log File Analyzer
+# Author: [Unnati Singh] | Course: Open Source Software
+# Description: This script searches for a keyword in a specified log file,
+# counts the number of occurrences, and displays the last 5 matching lines.
+# This helps in monitoring errors or important events in system logs.
+
+# --- Variables ---
+LOGFILE=$1                    # First argument: path to the log file to analyze
+KEYWORD=${2:-"error"}         # Second argument: keyword to search (default is "error")
+
+# --- Check if the log file exists ---
+if [ ! -f "$LOGFILE" ]; then
+    echo "Error: File '$LOGFILE' not found."
+    exit 1
+fi
+
+# --- Check if the log file is readable ---
+if [ ! -r "$LOGFILE" ]; then
+    echo "Error: No permission to read '$LOGFILE'."
+    echo "Try running: sudo $0 $LOGFILE $KEYWORD"
+    exit 1
+fi
+
+# --- Count occurrences of the keyword (case-insensitive) ---
+COUNT=$(grep -i "$KEYWORD" "$LOGFILE" | wc -l)
+echo "Keyword '$KEYWORD' found $COUNT times in '$LOGFILE'"
+
+# --- Display the last 5 lines containing the keyword ---
+echo ""
+echo "Last 5 lines containing '$KEYWORD':"
+grep -i "$KEYWORD" "$LOGFILE" | tail -5
+
+# --- End of script ---
