@@ -1,29 +1,36 @@
 #!/bin/bash
-# Script 1: System Identity Report
-# Author: [Unnati Singh] | Course: Open Source Software
-# Description: Displays basic system information for auditing purposes.
-# This includes user details, home directory, kernel version, system uptime, and current date/time.
 
-# --- Header for clarity ---
-echo "================================"
-echo " Open Source Audit"
-echo "================================"
+#Script 1: System Identity Report
+#Author: [UNNATI SINGH]
+#Description: Displays basic system information for auditing purposes.
+#This includes user details , home directory, kernel version, system uptime,
+#current date and time
 
-# --- Step 1: Show the current logged-in user ---
-# 'whoami' prints the username of the user running the script
+echo "==============================="
+echo "Open Source Audit"
+echo "==============================="
+
+echo "Hello"
+
+#-----shows the current logged-in user-----
+#whoami prints the username of the user running the script
 echo "User: $(whoami)"
 
-# --- Step 2: Show the home directory of the user ---
-# $HOME is an environment variable storing the path to the user's home directory
+#-----shows the home directory of the user-----
+#'$HOME' is the environment variable storing the path to the users' home directory
 echo "Home Directory: $HOME"
 
-# --- Step 3: Show the Linux kernel version ---
-# 'uname -r' displays the currently running kernel version
+#-----shows the linux kernel version-----
+# uname -r displays the currently running kernel version
 echo "Kernel Version: $(uname -r)"
 
-# --- Step 4: Show system uptime ---
-# 'uptime -p' prints how long the system has been running in a human-readable format
+#-----shows the system uptime-----
+#uptime -p prints how long the system has been running in a human readable format
 echo "Uptime: $(uptime -p)"
+
+#-----shows the current date and time-----
+# $(date) displays the current date and time of system
+echo "Date and Time: $(date)"
 
 # --- Step 5: Show the current date and time ---
 # 'date' displays the system's current date and time
