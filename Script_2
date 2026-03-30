@@ -1,0 +1,42 @@
+#!/bin/bash
+# Script: Package Check & Info
+# Author: [Unnati Singh] | Course: Open Source Software
+# Description: Checks if a specified package is installed on the system,
+# displays its details if installed, and gives a brief description
+# of the package using a case statement.
+
+# --- Step 1: Define the package to check ---
+PACKAGE="mysql-server"   # Change this to check other packages if needed
+
+echo "Checking package: $PACKAGE"
+
+# --- Step 2: Check if the package is installed ---
+# dpkg -l lists installed packages
+# grep -q searches quietly (returns success/failure without printing)
+if dpkg -l | grep -q $PACKAGE; then
+    echo "$PACKAGE is installed."
+    # Display the package details (version, architecture, description)
+    dpkg -l | grep $PACKAGE
+else
+    echo "$PACKAGE is NOT installed."
+fi
+
+# --- Step 3: Provide package description using a case statement ---
+# Case statements allow checking multiple options for the same variable
+case $PACKAGE in
+    mysql-server)
+        echo "MySQL: open-source database powering millions of applications"
+        ;;
+    apache2)
+        echo "Apache: widely-used web server powering websites"
+        ;;
+    vlc)
+        echo "VLC: media player that supports almost all audio/video formats"
+        ;;
+    firefox)
+        echo "Firefox: open-source browser for the open web"
+        ;;
+    *)
+        echo "Unknown package"
+        ;;
+esac
