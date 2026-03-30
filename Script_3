@@ -1,59 +1,35 @@
 #!/bin/bash
 # Script 3: Disk & Permission Audit Report
-# Author: [Unnati Singh] | Course: Open Source Software
-# Description: This script audits key Linux directories for existence, permissions, ownership,
-# and size. Additionally, it checks the MySQL configuration directory. Useful for understanding
-# system organization and MySQL setup.
+#Author: [UNNATI SINGH] | Course: Open Source Software
+#Description: This script audits key linux directories for existence, permissions, ownerships
+#and size. Additionally it checks the MySQL configuration directory. useful for understanding
+#system organization and MySQL setup.
 
-echo "======================================"
-echo "   Disk & Permission Audit Report"
-echo "======================================"
+echo = "=============================================="
+echo = " Disk and Permission Audit Report "
+echo = "=============================================="
 
-# --- Step 1: Define directories to check ---
-# List of important directories to audit
-DIRS="/etc /var/log /home /usr/bin /tmp"
+#---define directories to check ---
+#list of important directories to audit
+DIRS=("/etc" "/var/log" "/home" "/usr/bin" "/tmp")
 
-# --- Step 2: Loop through each directory ---
-for DIR in $DIRS
-do
-    echo ""
+#---Loop through h each directories--
+for DIR in "${DIRS[@]}"; do
+    echo " "
     echo "Checking: $DIR"
+    #check if directory exists
+    if [ -d "$DIR" ]; then
+        PERMS=$(ls -ld $DIR | awk '{print $1}')
+        OWNER=$(ls -ld $DIR | awk '{print $3}')
+        GROUP=$(ls -ld $DIR | awk '{print $4}')
+        #Display size of directory
+        SIZE=$(du -sh $DIR 2>/dev/null | cut -f1)
 
-    # Check if directory exists
-    if [ -d "$DIR" ]
-    then
-        echo "Directory exists"
-
-        # Display permissions, owner, and group
-        echo "Permissions & Owner:"
-        ls -ld "$DIR"
-
-        # Display size of directory (human-readable), suppress errors
-        echo "Size:"
-        du -sh "$DIR" 2>/dev/null
+        echo "Permissions : $PERMS"
+        echo "Owner       : $OWNER"
+        echo "Group       : $GROUP"
+        echo "Size        : $SIZE"
     else
-        echo "Directory does not exist"
+        echo "Directory does not exists"
     fi
 done
-
-echo ""
-echo "======================================"
-echo " MySQL Configuration Directory Check"
-echo "======================================"
-
-# --- Step 3: Check MySQL configuration directory ---
-MYSQL_CONFIG="/etc/mysql"
-
-if [ -d "$MYSQL_CONFIG" ]
-then
-    echo "MySQL config directory exists:"
-    # Show permissions, owner, and group
-    ls -ld "$MYSQL_CONFIG"
-else
-    echo "MySQL config directory not found"
-fi
-
-echo ""
-echo "======================================"
-echo "        Audit Completed"
-echo "======================================"
