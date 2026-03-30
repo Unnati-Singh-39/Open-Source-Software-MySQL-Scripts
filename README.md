@@ -22,18 +22,14 @@ ________________
 
 ## Scripts Included
 
-Script                            Purpose
-----------------------------------------------------------------------------------------------------------------
-script1.sh  :           Displays system information (user, home directory, kernel version, uptime, date/time)
-
-script2.sh  :           Checks if MySQL is installed and shows its description
-
-script3.sh  :           Audits critical directories and MySQL configuration directory; displays permissions and size
-
-script4.sh  :           Reads a log file and counts occurrences of a keyword (default: “error”), displaying last matching lines
-
-script5.sh  :           Creates a timestamped backup of all MySQL databases and shows MySQL service status
-
+Script	Purpose
+| Script     | Purpose                                                                                      |
+| ---------- | -------------------------------------------------------------------------------------------- |
+| script1.sh | Displays system information (user, home directory, kernel version, uptime, date/time)        |
+| script2.sh | Checks if MySQL is installed and shows its description                                       |
+| script3.sh | Audits critical directories and MySQL configuration directory; displays permissions and size |
+| script4.sh | Reads a log file and counts occurrences of a keyword (default: “error”)                      |
+| script5.sh | Creates a timestamped backup of all MySQL databases and shows MySQL service status           |
 
 ________________
 
