@@ -33,3 +33,16 @@ for DIR in "${DIRS[@]}"; do
         echo "Directory does not exists"
     fi
 done
+
+echo " "
+echo "=============================================="
+echo "Checking MySQL Config Directory"
+echo "=============================================="
+
+CONFIG="/etc/mysql"
+
+if [ -d "$CONFIG" ]; then
+    ls -ld $CONFIG
+else
+    echo "MySQL config directory not found"
+fi
