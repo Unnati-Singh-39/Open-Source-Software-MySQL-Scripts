@@ -1,0 +1,38 @@
+#!/bin/bash
+# Script 5: MySQL Database Backup & Status
+#Author: [UNNATI SINGH] | Course: Open Source Software
+#Description: Backs up all MySQL databases, shows backup size, and displays MySQL service status.
+
+#---Variables---
+BACKUP_DIR="$HOME/mysql_backups"        #Backup Directory
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")      #Timestamp for backup
+LOGFILE="$BACKUP_DIR/backup_log.txt"    #Log file for backup info
+
+#---creates backup directory if it doesn't exists--
+
+mkdir -p "$BACKUP_DIR"
+
+
+#---Backup all databases---
+echo "Starting MySQL backup at $(date)" | tee -a "$LOGFILE"
+sudo mysqldump --all-databases > "$BACKUP_DIR/all_databases_$TIMESTAMP.sql"
+
+#---Checks if backup is successful---
+if [ $? -eq 0 ]; then
+    echo "Backup successful!" | tee -a "$LOGFILE"
+else
+    echo "Backup failed!" | tee -a "$LOGFILE"
+    EXIT 1
+fi
+
+#---show backup file size---
+BACKUP_SIZE=$(du -sh "$BACKUP_DIR/all_databases_$TIMESTAMP.sql" | awk '{print $1}')
+echo "Backup file size: $BACKUP_SIZE" | tee -a "$LOGFILE"
+
+#---Display mysql service status---
+echo "
+echo "MySQL service status:"
+systemctl status mysql | head -15
+
+echo " "
+echo "Backup and status check completed."
